@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
     }
 });
 
+const formatter = new Intl.NumberFormat('nl-NL', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2
+});
+
 class CategoryListItem extends React.Component {
 
     product = this.props.product;
@@ -18,7 +24,7 @@ class CategoryListItem extends React.Component {
             <List.Item
                 title={this.product.name}
                 left={({props}) => <List.Icon {...props} icon="add-shopping-cart" />}
-                right={() => <Text style={styles.price}>{this.product.price}</Text>}
+                right={() => <Text style={styles.price}>{formatter.format(this.product.price)}</Text>}
                 onPress={this.props.onPress}
             />
         )
