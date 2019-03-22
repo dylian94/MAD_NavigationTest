@@ -3,11 +3,16 @@ import {StyleSheet, Text, View} from 'react-native';
 import AppHeader from "../Components/AppHeader";
 
 export default class ProductCategory extends React.Component {
+
+    values = {
+       categoryName: this.props.navigation.getParam("name", "Naamloos")
+    };
+
     render() {
         return (
             <View style={styles.container}>
-                <AppHeader appTitle="Product category" />
-                <Text>Product categories</Text>
+                <AppHeader appTitle={this.values.categoryName} />
+                <Text>Product category</Text>
             </View>
         );
     }
