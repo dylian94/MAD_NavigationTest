@@ -11,7 +11,7 @@ export default class ProductCategory extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <AppHeader appTitle={this.values.categoryName} />
+                <AppHeader appTitle={this.values.categoryName} canGoBack={true} />
                 <Text>Product category</Text>
             </View>
         );

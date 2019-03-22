@@ -8,22 +8,32 @@ export default createStackNavigator(
         Categories: {
             // `ProfileScreen` is a React component that will be the main content of the screen.
             screen: ProductCategories,
-            // When `ProfileScreen` is loaded by the StackNavigator, it will be given a `navigation` prop.
+            // When `ProductCategories` is loaded by the StackNavigator, it will be given a `navigation` prop.
 
             // Optional: When deep linking or using react-navigation in a web app, this path is used:
-            // path: 'people/:name',
+            path: 'categories',
             // The action and route params are extracted from the path.
 
             // Optional: Override the `navigationOptions` for the screen
             // navigationOptions: ({ navigation }) => ({
-            //     title: `Category: ${navigation.state.params.name}`,
-            // }),
+            // })
         },
         Category: {
-            screen: ProductCategory
+            // `ProfileScreen` is a React component that will be the main content of the screen.
+            screen: ProductCategory,
+            // When `ProductCategory` is loaded by the StackNavigator, it will be given a `navigation` prop.
+
+            // Optional: When deep linking or using react-navigation in a web app, this path is used:
+            path: 'categories/:name',
+            // The action and route params are extracted from the path.
+
+            // Optional: Override the `navigationOptions` for the screen
+            // navigationOptions: ({ navigation }) => ({
+            // })
         }
     },
     {
-        initialRouteName: 'Categories'
+        initialRouteName: 'Categories',
+        headerMode: 'none'
     }
 );
