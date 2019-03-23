@@ -13,8 +13,9 @@ const styles = StyleSheet.create({
 export default class ProductCategory extends React.Component {
     _resetCategory = () => {
         this.setState({
+            refreshing: true,
             category: {
-                name: "",
+                name: this.props.navigation.getParam("name", "0"),
                 products: []
             }
         });
@@ -23,13 +24,16 @@ export default class ProductCategory extends React.Component {
     _retrieveCategory = () => {
         this._resetCategory();
 
-        fetch('https://demo6519375.mockable.io/category/' + this.props.navigation.getParam("id", "0"))
+        const url = 'https://5c95599f498269001487f25a.mockapi.io/shop/v1/categories/' + this.props.navigation.getParam("id", "0");
+
+        fetch(url)
             .then(response => response.text()) // Uitlezen als text omdat we zelf willen verifiëren dat de JSON juist is
             .then(text => {
                 try {
                     const result = JSON.parse(text);
-                    if (result.status === 'success') {
+                    if (result.products && result.products.length > 0) {
                         this.setState({
+                            refreshing: false,
                             category: result
                         });
                     }
@@ -51,9 +55,10 @@ export default class ProductCategory extends React.Component {
     constructor() {
         super();
         this.state = {
+            refreshing: false,
             category: {
                 name: "",
-                    products: []
+                products: []
             }
         }
     }
@@ -65,8 +70,8 @@ export default class ProductCategory extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <AppHeader appTitle={this.state.category.name} canGoBack={true} onRefresh={this._retrieveCategory}/>
-                <ProductList products={this.state.category.products} />
+                <AppHeader appTitle={this.state.category.name} canGoBack={true} />
+                <ProductList products={this.state.category.products} onRefresh={this._retrieveCategory} refreshing={this.state.refreshing} />
             </View>
         );
     }

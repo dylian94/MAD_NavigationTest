@@ -14,28 +14,22 @@ const styles = StyleSheet.create({
 class CategoryList extends React.Component {
     _keyExtractor = (item, index) => "category-" + item.id;
 
-    _onPressItem = (categoryId) => {
-        this.props.navigation.navigate('Category', {id: categoryId});
+    _onPressItem = (categoryId, categoryName) => {
+        this.props.navigation.navigate('Category', {id: categoryId, name: categoryName});
     };
 
-    _renderItem = ({item}) => (<CategoryListItem category={item} onPress={this._onPressItem} />);
+    _renderItem = ({item}) => (<CategoryListItem category={item} onPress={this._onPressItem}/>);
 
     render() {
-        if (this.props.categories.length > 0) {
-            return (
-                <FlatList
-                    data={this.props.categories}
-                    keyExtractor={this._keyExtractor}
-                    renderItem={this._renderItem}
-                />
-            );
-        } else {
-            return (
-                <View style={styles.centeredContainer}>
-                    <ActivityIndicator size="large"/>
-                </View>
-            )
-        }
+        return (
+            <FlatList
+                data={this.props.categories}
+                refreshing={this.props.refreshing}
+                keyExtractor={this._keyExtractor}
+                renderItem={this._renderItem}
+                onRefresh={this.props.onRefresh}
+            />
+        );
     }
 }
 

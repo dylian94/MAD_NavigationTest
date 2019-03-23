@@ -4,10 +4,7 @@ import {withNavigation} from "react-navigation";
 import ProductListItem from "./ProductListItem";
 
 const styles = StyleSheet.create({
-    centeredContainer: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+    list: {
     }
 });
 
@@ -18,24 +15,20 @@ class ProductList extends React.Component {
         this.props.navigation.navigate('Product', {id: productId});
     };
 
-    _renderItem = ({item}) => (<ProductListItem product={item} onPress={this._onPressItem} />);
+    _renderItem = ({item}) => (<ProductListItem product={item} onPress={this._onPressItem}/>);
 
     render() {
-        if (this.props.products.length > 0) {
-            return (
-                <FlatList
-                    data={this.props.products}
-                    keyExtractor={this._keyExtractor}
-                    renderItem={this._renderItem}
-                />
-            );
-        } else {
-            return (
-                <View style={styles.centeredContainer}>
-                    <ActivityIndicator size="large"/>
-                </View>
-            )
-        }
+        return (
+            <FlatList
+                contentContainerStyle={styles.list}
+                numColumns={2}
+                data={this.props.products}
+                refreshing={this.props.refreshing}
+                keyExtractor={this._keyExtractor}
+                renderItem={this._renderItem}
+                onRefresh={this.props.onRefresh}
+            />
+        );
     }
 }
 

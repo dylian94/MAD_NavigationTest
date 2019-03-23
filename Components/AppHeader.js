@@ -18,7 +18,7 @@ class AppHeader extends React.Component {
                     <Appbar.Action icon="refresh" onPress={this.props.onRefresh}/>
                 </Appbar.Header>
             );
-        }else if (this.props.canGoBack) {
+        } else if (this.props.canGoBack) {
             return (
                 <Appbar.Header>
                     <Appbar.BackAction onPress={this._goBack}/>
@@ -36,6 +36,16 @@ class AppHeader extends React.Component {
                         subtitle={this.props.appSubTitle}
                     />
                     <Appbar.Action icon="refresh" onPress={this.props.onRefresh} />
+                </Appbar.Header>
+            );
+        }else if (this.props.onClear) {
+            return (
+                <Appbar.Header>
+                    <Appbar.Content
+                        title={this.props.appTitle}
+                        subtitle={this.props.appSubTitle}
+                    />
+                    <Appbar.Action icon="remove-shopping-cart" onPress={this.props.onClear} />
                 </Appbar.Header>
             );
         } else {

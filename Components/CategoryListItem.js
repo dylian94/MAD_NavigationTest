@@ -9,7 +9,7 @@ class CategoryListItem extends React.Component {
 
     _onPress = () =>
     {
-        this.props.onPress(this.category.id);
+        this.props.onPress(this.category.id, this.category.name);
     };
 
     render() {

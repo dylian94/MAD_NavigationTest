@@ -5,7 +5,7 @@ import AppHeader from "../Components/AppHeader";
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1
     },
     card: {
         margin: 16
